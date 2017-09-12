@@ -6,6 +6,6 @@ User Documentation
 .. toctree::
    :maxdepth: 2
 
-   Setup <setup>
+   Running the platform <setup>
    Trouble Shooting <trouble_shooting>
 
