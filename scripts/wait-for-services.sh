@@ -25,8 +25,7 @@ docker run \
     --link graph-navigation \
     --link graph-typesystem \
     --link keycloak \
-    --link resource-manager \
     --link storage \
-    -e TARGETS=keycloak:8080,deployer:5000,explorer:9000,graph-mutation:9000,graph-navigation:9000,graph-typesystem:9000,resource-manager:9000,storage:9000 \
+    -e TARGETS=keycloak:8080,deployer:5000,explorer:9000,graph-mutation:9000,graph-navigation:9000,graph-typesystem:9000,storage:9000 \
     -e TIMEOUT=300 \
     waisbrot/wait
