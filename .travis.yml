@@ -17,7 +17,6 @@
 # limitations under the License.
 
 sudo: true
-dist: trusty
 
 notifications:
   email: false
@@ -28,6 +27,7 @@ services:
 addons:
   apt:
     packages:
+      - language-pack-en
       - enchant
       - shellcheck
 
