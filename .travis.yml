@@ -17,6 +17,7 @@
 # limitations under the License.
 
 sudo: true
+dist: trusty
 
 notifications:
   email: false
@@ -25,12 +26,6 @@ services:
   - docker
 
 addons:
-  apt:
-    packages:
-      - language-pack-en
-      - enchant
-      - shellcheck
-
   hosts:
     - renga.local
     - gitlab.renga.local
@@ -41,6 +36,7 @@ branches:
   only:
     - master
     - development
+    - jupyterhub
 
 language: python
 
@@ -50,11 +46,14 @@ matrix:
 python:
   - "3.6"
 
+before_install:
+  - sudo apt-get install enchant
+
 install:
   - ./scripts/travis-install.sh
 
 before_script: |-
-    make start
+    PLATFORM_VERSION=development make start
 
 script:
   - xvfb-run make test
