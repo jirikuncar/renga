@@ -80,12 +80,19 @@ def whoami(user):
     SERVICE_PREFIX + '<namespace>/<project>/<commit_sha>/<environment_slug>',
     methods=['GET'])
 @app.route(
-    SERVICE_PREFIX + '<namespace>/<project>/<commit_sha>/<environment_slug>/<path:notebook>',
+    SERVICE_PREFIX +
+    '<namespace>/<project>/<commit_sha>/<environment_slug>/<path:notebook>',
     methods=['GET'])
 @authenticated
-def launch_notebook(user, namespace, project, commit_sha, environment_slug, notebook=None):
+def launch_notebook(user,
+                    namespace,
+                    project,
+                    commit_sha,
+                    environment_slug,
+                    notebook=None):
     """Launch user server with a given name."""
-    server_name = _server_name(namespace, project, commit_sha, environment_slug)
+    server_name = _server_name(namespace, project, commit_sha,
+                               environment_slug)
     headers = {auth.auth_header_name: 'token {0}'.format(auth.api_token)}
     # 1. launch using spawner that checks the access
     r = requests.request(
@@ -106,7 +113,7 @@ def launch_notebook(user, namespace, project, commit_sha, environment_slug, note
     if r.status_code not in {201, 202, 400}:
         abort(r.status_code)
 
-    notebook_url = auth.hub_host + '/user/{user[name]}/{server_name}/'.format(
+    notebook_url = auth.hub_prefix + 'user/{user[name]}/{server_name}/'.format(
         user=user, server_name=server_name)
 
     if notebook:
@@ -121,7 +128,8 @@ def launch_notebook(user, namespace, project, commit_sha, environment_slug, note
 @authenticated
 def stop_notebook(user, namespace, project, commit_sha, environment_slug):
     """Stop user server with name."""
-    server_name = _server_name(namespace, project, commit_sha, environment_slug)
+    server_name = _server_name(namespace, project, commit_sha,
+                               environment_slug)
     headers = {'Authorization': 'token %s' % auth.api_token}
 
     r = requests.request(
