@@ -1,6 +1,9 @@
 #
 # Configuration file for deploying the renga chart on minikube
 #
+global:
+  renga:
+    domain: renga-k8s.build
 
 ingress:
   enabled: true

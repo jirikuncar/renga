@@ -83,7 +83,8 @@ services:
       retries: 5
 
   gitlab:
-    image: gitlab/gitlab-ce:latest
+    image: ${DOCKER_PREFIX}gitlab:${PLATFORM_VERSION}
+    build: services/gitlab
     restart: always
     environment:
       GITLAB_OMNIBUS_CONFIG: |
@@ -264,7 +265,7 @@ services:
     build:
       context: services/notebook
       args:
-        BASE_IMAGE: rengahub/minimal-notebook:e21fd4181aa2
+        BASE_IMAGE: rengahub/minimal-notebook:${PLATFORM_VERSION}
         JUPYTERHUB_VERSION: master
     image: ${DOCKER_PREFIX}singleuser:${PLATFORM_VERSION}
     command: renga --version

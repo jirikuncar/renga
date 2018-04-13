@@ -20,7 +20,7 @@ spec:
       annotations:
         # This lets us autorestart when the secret changes!
         checksum/hub-secret: {{ include (print $.Template.BasePath "/hub/secret.yaml") . | sha256sum }}
-        checksum/proxy-secret: {{ include (print $.Template.BasePath "/proxy/secret.yaml") . | sha256sum }}
+        checksum/proxy-secret:  {{ include (print $.Template.BasePath "/proxy/secret.yaml") . | sha256sum }}
         hub.jupyter.org/https-type: {{ .Values.proxy.https.type }}
       labels:
         name: proxy
