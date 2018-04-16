@@ -60,10 +60,10 @@ gitlab_rails['initial_root_password'] = ENV['GITLAB_PASSWORD']
 postgresql['enable'] = false
 gitlab_rails['db_adapter'] = "postgresql"
 gitlab_rails['db_encoding'] = "utf-8"
-gitlab_rails['db_database'] = ENV['POSTGRES_DATABASE']
-gitlab_rails['db_username'] = ENV['POSTGRES_USER']
+gitlab_rails['db_database'] = ENV['PGDATABASE']
+gitlab_rails['db_username'] = ENV['PGUSER']
 gitlab_rails['db_password'] = ENV['PGPASSWORD']
-gitlab_rails['db_host'] = '{{ template "postgresql.fullname" . }}'
+gitlab_rails['db_host'] = ENV['PGHOST']
 gitlab_rails['db_port'] = 5432
 
 ### GitLab Redis settings

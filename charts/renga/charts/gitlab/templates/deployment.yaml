@@ -28,11 +28,20 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - "psql"
+                - "-c"
+                - "UPDATE application_settings SET auto_devops_enabled = true, auto_devops_domain = '{{ .Values.global.renga.domain }}' WHERE id = 1;"
         env:
-        - name: POSTGRES_DATABASE
+        - name: PGDATABASE
           value: {{ .Values.global.gitlab.postgresDatabase }}
-        - name: POSTGRES_USER
+        - name: PGUSER
           value: {{ .Values.global.gitlab.postgresUser }}
+        - name: PGHOST
+          value: '{{ template "postgresql.fullname" . }}'
         - name: PGPASSWORD
           valueFrom:
             secretKeyRef:
