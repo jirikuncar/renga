@@ -20,6 +20,8 @@ jupyterhub:
   hub:
     cookieSecret: 7c232b97bda321be7e59b9834dfadbb89652da1e0150dff9b3dadb9aa8b4caab
     baseUrl: '/jupyterhub/'
+    extraEnv:
+      GITLAB_URL: http://gitlab.renku-k8s.build
     db:
       type: postgres
       url: postgres+psycopg2://jupyterhub:jupyterhub@renku-postgresql:5432/jupyterhub
